@@ -1,0 +1,56 @@
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 20px;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+img {
+  object-fit: cover;
+  border: 0.5px solid black;
+  width: 250px;
+  height: 250px;
+}
+
+.card {
+align-items: center;
+border: 1px solid black;
+background-color: azure;
+text-align: center;
+padding: 7px;
+margin: 5px;
+
+}
+
+.main {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap; 
+justify-content: center;
+}
+
+.header {
+ text-align: center;
+
+}
+
+.button{
+  margin: 10px;
+}
+
+.puppycontainer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background:azure;
+  align-content: center;
+  text-align: center;
+}
+.pure-control-group{
+  margin: 5px;}
+
