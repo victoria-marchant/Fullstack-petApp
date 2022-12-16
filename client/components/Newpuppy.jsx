@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {useNavigate} from "react-router-dom"
 import { addNewPuppy } from '../actions/PuppyActions'
+import CatorDog from './CatOrDog'
 
 
 export default function Newpuppy() {
@@ -9,13 +10,16 @@ export default function Newpuppy() {
   const dispatch = useDispatch()
   
   const [newEntry, setNewEntry] = useState({
-    id: "",
+    id: '',
     name: '',
     owner: '',
+    animalType: '',
     breed: '',
     imagePath: '',
   })
+  const [isOtherType, setOtherType] = useState('other')
 
+// console.log(isOtherType)
 
   function onSubmit(evt) {
 evt.preventDefault()
@@ -32,6 +36,11 @@ setNewEntry({
 })
 }
 
+function handleTypeChange(e) {
+  setOtherType(e.target.value)
+
+}
+
 return(
 
 <>
@@ -39,11 +48,11 @@ return(
   <a href="/">Home</a>
 
 <form  onSubmit={onSubmit}>
-        <h2 className="post-title">Add Your New Doggo</h2>
+        <h2 className="post-title">Add Your New Pet</h2>
         <img src="/images/dogpaw.png" alt="paw print"/>
 
         <div className="pure-control-group">
-          <label htmlFor="name">Puppy Name </label>
+          <label htmlFor="name">Pet Name </label>
           <input
             type="text"
             name="name"
@@ -51,9 +60,11 @@ return(
             onChange={handleChange}
           />
         </div>
+        
+     
 
         <div className="pure-control-group">
-          <label htmlFor="owner">Puppies Owner </label>
+          <label htmlFor="owner">Pet Owner </label>
           <input
             name="owner"
             value={newEntry.owner}
@@ -61,14 +72,45 @@ return(
           ></input>
         </div>
 
-        <div className="pure-control-group">
-          <label htmlFor="breed">Puppies Breed </label>
+           {/* cat or dog encorp futher external api for cat switch with radio button */}
+           <div className="pure-control-group">
+            <label htmlFor='pet_type'>Pet Type: </label>
           <input
-            name="breed"
-            value={newEntry.breed}
-            onChange={handleChange}
-          ></input>
+            type="radio"
+            name="pet_type"
+            id= "catSelect"
+            value="cat"
+            onChange={handleTypeChange}
+          />
+          <label htmlFor="catSelect">Cat</label>
+          <input
+            type="radio"
+            name="pet_type"
+            id= "dogSelect"
+            value="dog"
+            onChange={handleTypeChange}
+          /> 
+          <label htmlFor="dogSelect">Dog</label>
+          <input
+            type="radio"
+            name="pet_type"
+            id= "otherSelect"
+            value="other"
+            checked={isOtherType === "other"}
+            onChange={handleTypeChange}
+          />
+          <label htmlFor="otherSelect">Other</label>
         </div>
+        <div>
+{isOtherType === 'other' ? ( <div> <label htmlFor="other">Animal Breed: </label>
+             <input
+            id='other'
+              className="primary-button"
+              type="text"
+              name="animalbreed"
+              onChange={handleChange}
+            /> </div> ) : (<CatorDog animalType = {isOtherType}/>)}
+           </div>
 
         <div className="pure-control-group">
           <label htmlFor="imagePath">Image URL </label>

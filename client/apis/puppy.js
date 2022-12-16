@@ -5,8 +5,9 @@ const baseUrl = '/api/v1/puppies'
 export function getPuppies() {
   return request
     .get(`${baseUrl}`)
-    .then((res) => {
-      return res.body
+    .then((response) => {
+      const allPuppies = response.body
+      return allPuppies
     })
     .catch(errorHandler('GET', '/'))
 }

@@ -3,6 +3,7 @@ exports.up = function (knex) {
     table.increments('id').primary()
     table.string('name')
     table.string('owner')
+    table.string('animalType')
     table.string('breed')
     table.string('imagePath')
   })

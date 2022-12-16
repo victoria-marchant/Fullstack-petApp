@@ -15,8 +15,8 @@ export function setPuppies(puppies) {
 export function fetchPuppies() {
   return (dispatch) => {
     return getPuppies()
-      .then((puppies) => {
-        dispatch(setPuppies(puppies))
+      .then((Puppies) => {
+        dispatch(setPuppies(Puppies))
         return null
       })
       .catch((err) => {

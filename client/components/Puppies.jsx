@@ -1,18 +1,30 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {Link } from "react-router-dom"
-import { fetchPuppies } from '../actions/PuppyActions'
+import {fetchPuppies} from '../actions/PuppyActions'
+import {fetchDogBreeds} from '../actions/DogApiActions'
 
 
 export default function Puppies() {
 const dispatch = useDispatch()
 
 const puppies = useSelector(state => state.puppies)
-// console.log(puppies)
+console.log(puppies)
 
-useEffect(() => {
-  dispatch(fetchPuppies())
-}, [])
+// const breedData = useSelector(state => state.dogBreeds)
+// console.log(breedData)
+
+// const names = breedData && breedData.map((data) => data.name)
+// console.log(names)
+
+
+// useEffect(() => {
+//   dispatch(fetchPuppies())
+//   dispatch(fetchDogBreeds())
+// }, [])
+// useEffect(() => {
+//   dispatch(fetchDogBreeds())
+// }, [])
 
 
   return (
