@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {useNavigate} from "react-router-dom"
 import { addNewPuppy } from '../actions/PuppyActions'
+import AddImage from './AddImage'
 import CatorDog from './CatOrDog'
 
 
@@ -18,8 +19,10 @@ export default function Newpuppy() {
     imagePath: '',
   })
   const [isOtherType, setOtherType] = useState('other')
+  const [isImageType, setImageType] = useState('URL')
 
 // console.log(isOtherType)
+console.log(newEntry)
 
   function onSubmit(evt) {
 evt.preventDefault()
@@ -28,17 +31,35 @@ setNewEntry(newEntry)
 navigate(`/`)
   }
 
-function handleChange(evt){
-  console.log(evt.target.name)
-setNewEntry({
-  ...newEntry,
-  [evt.target.name]: evt.target.value,
-})
-}
+// function handleChange(evt){
+//   // console.log(evt.target.name)
+// setNewEntry({
+//   ...newEntry,
+//   [evt.target.name]: evt.target.value,
+// })
+// }
+const handleChange=(evnt)=>{
+        
+  const inputFieldValue = evnt.target.value;
+  const inputFieldName = evnt.target.name;
+  const NewInputValue = {...newEntry,[inputFieldName]:inputFieldValue}
+  setNewEntry(NewInputValue);
+  }
 
 function handleTypeChange(e) {
+  console.log(e.target.value)
   setOtherType(e.target.value)
+  // let animalType = e
+  // console.log(animalType)
+  // animalType = newEntry.animalType
+  // handleChange(animalType)
 
+}
+
+function handleiTypeChange(e){
+  setImageType(e.target.value)
+  
+ 
 }
 
 return(
@@ -74,30 +95,33 @@ return(
 
            {/* cat or dog encorp futher external api for cat switch with radio button */}
            <div className="pure-control-group">
-            <label htmlFor='pet_type'>Pet Type: </label>
+            <label htmlFor='animalType'>Pet Type: </label>
           <input
             type="radio"
-            name="pet_type"
+            name="animalType"
             id= "catSelect"
             value="cat"
-            onChange={handleTypeChange}
+            onClick={handleTypeChange}
+            onChange={handleChange}
           />
           <label htmlFor="catSelect">Cat</label>
           <input
             type="radio"
-            name="pet_type"
+            name="animalType"
             id= "dogSelect"
             value="dog"
-            onChange={handleTypeChange}
+            onClick={handleTypeChange}
+            onChange={handleChange}
           /> 
           <label htmlFor="dogSelect">Dog</label>
           <input
             type="radio"
-            name="pet_type"
+            name="animalType"
             id= "otherSelect"
             value="other"
-            checked={isOtherType === "other"}
-            onChange={handleTypeChange}
+            // checked={isOtherType === "other"}
+            onClick={handleTypeChange}
+            onChange={handleChange}
           />
           <label htmlFor="otherSelect">Other</label>
         </div>
@@ -109,16 +133,37 @@ return(
               type="text"
               name="animalbreed"
               onChange={handleChange}
-            /> </div> ) : (<CatorDog animalType = {isOtherType}/>)}
+            /> </div> ) : (<CatorDog animalType = {isOtherType} breed = {newEntry.breed} name ={newEntry.name}  handleChange = {handleChange}/>)}
            </div>
 
         <div className="pure-control-group">
-          <label htmlFor="imagePath">Image URL </label>
+          <label htmlFor='pet_type'>Image Upload Format: </label>
+          <input
+            type="radio"
+            name="image_type"
+            id= "URLSelect"
+            value="URL"
+            checked={isImageType === "URL"}
+            onChange={handleiTypeChange}
+          />
+          <label htmlFor="URLSelect">URL</label>
+
+          <input
+            type="radio"
+            name="image_type"
+            id= "uploadSelect"
+            value="upload"
+            onChange={handleiTypeChange}
+          /> 
+          <label htmlFor="uploadSelect">Upload</label>
+         <AddImage imageType = {isImageType}/>
+          {/* <AddImage/> */}
+          {/* <label htmlFor="imagePath">Image URL </label>
           <input
             name="imagePath"
             value={newEntry.imagePath}
             onChange={handleChange}
-          ></input>
+          ></input> */}
         </div>
 
         <div className="pure-controls">

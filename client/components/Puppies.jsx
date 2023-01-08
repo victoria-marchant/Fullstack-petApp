@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {Link } from "react-router-dom"
 import {fetchPuppies} from '../actions/PuppyActions'
-import {fetchDogBreeds} from '../actions/DogApiActions'
+// import {fetchDogBreeds} from '../actions/DogApiActions'
+import { getDogBreeds } from '../apis/DogApi'
 
 
 export default function Puppies() {
@@ -18,14 +19,15 @@ console.log(puppies)
 // console.log(names)
 
 
-// useEffect(() => {
-//   dispatch(fetchPuppies())
-//   dispatch(fetchDogBreeds())
-// }, [])
+useEffect(() => {
+  dispatch(fetchPuppies())
+  // dispatch(fetchDogBreeds())
+}, [])
 // useEffect(() => {
 //   dispatch(fetchDogBreeds())
 // }, [])
 
+getDogBreeds() 
 
   return (
     <>

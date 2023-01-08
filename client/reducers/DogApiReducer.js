@@ -1,18 +1,16 @@
-// import { DOG_BREEDS, DOG_BREED_NAMES } from '../actions/DogApiActions'
+import { DOG_BREEDS } from '../actions/DogApiActions'
 
-// const initialState = []
+const initialState = []
 
-// const DogApiReducer = (state = initialState, action) => {
-//   const { type, payload } = action
+const DogApiReducer = (state = initialState, action) => {
+  const { type, payload } = action
 
-//   switch (type) {
-//     case DOG_BREEDS:
-//       return payload
-//     case DOG_BREED_NAMES:
-//       return payload
-//     default:
-//       return state
-//   }
-// }
+  switch (type) {
+    case DOG_BREEDS:
+      return payload
+    default:
+      return state
+  }
+}
 
-// export default DogApiReducer
+export default DogApiReducer

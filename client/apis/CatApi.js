@@ -1,12 +1,11 @@
 import request from 'superagent'
 
-export function getDogBreeds() {
+export function getCatBreeds() {
   return request
-    .get(`http://localhost:3000/api/v1/dogapi/breeds`)
+    .get(`http://localhost:3000/api/v1/catapi/breeds`)
     .then((response) => {
-      const dogBreedInfo = response.body
-      // console.log(dogBreedInfo)
-      return dogBreedInfo
+      const catBreedInfo = response.body
+      return catBreedInfo
     })
     .catch(errorHandler('GET', '/'))
 }

@@ -1,40 +1,69 @@
-
-import React, { useState} from 'react'
-
-import { useParams,  useNavigate} from "react-router-dom"
+import React, { useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { editPuppy, deletePuppy  } from '../actions/PuppyActions'
-
-
-
+import {fetchDogBreeds} from '../actions/DogApiActions'
+import { fetchCatBreeds } from '../actions/CatApiActions'
 
 
 export default function CatOrDog(props) {
+const dispatch = useDispatch()
 
-  const catDog = props.animalType
-  console.log(catDog)
+const catDog = props.animalType
+
+let dogBreeds = useSelector(state => state.dogBreeds)
+const dogBreedNames = dogBreeds && dogBreeds.map((breed) => breed.name )
+
+let catBreeds = useSelector(state => state.catBreeds)
+const catBreedNames = catBreeds && catBreeds.map((breed) => breed.name)
+
+
+// const [dogBreed, setdogBreed] = useState('Dog Breed')
+// const [catBreed, setCatBreed] = useState('Cat Breed')
+
+// function handleDogChange(evt){
+//   // console.log(evt.target.value)
+//   setdogBreed(evt.target.value)
+// }
+
+// function handleCatChange(evt){
+//   console.log(evt.target.value)
+//   setCatBreed(evt.target.value)
+// }
+
+
+useEffect(() => {
+  dispatch(fetchDogBreeds())
+  dispatch(fetchCatBreeds())
+}, [])
+
+  
+  
   return(
 
 <div>
 {catDog === "dog" ? (<div>
 <label htmlFor="dogBreed">Dog Breed: </label>
              <select
+             value ={props.breed}
             id='dogBreed'
-              name="dogType"
-              // onChange={handleChange}
-            > 
-            <option value="Pug">Pug</option>
-            <option value="GermanShepard">GermanShepard</option>
-            </select>
+            name="breed"
+            onChange={props.handleChange}> 
+            {/* set default value on select */}
+            <option value="" disabled selected hidden>Choose {props.name}`s breed...</option>
+            {dogBreedNames.map((breed, i) => 
+          <option value = {breed} key= {i}>{breed}</option>)}
+      </select>
             </div> ): (<div>
 <label htmlFor="catBreed">Cat Breed: </label>
              <select
+             value = {props.breed}
             id='catBreed'
-              name="catType"
-              // onChange={handleChange}
+              name="breed"
+              onChange={props.handleChange}
             > 
-            <option value="cornishRex">Cornish Rex</option>
-            <option value="Birman">Birman</option>
+            <option value="" disabled selected hidden>Choose {props.name}`s breed...</option>
+             {catBreedNames.map((breed, i) => 
+          <option value = {breed} key= {i}>{breed}</option>)}
+            
             </select>
             </div> )}
 
@@ -42,35 +71,4 @@ export default function CatOrDog(props) {
   )}
 
 
-  {/* create drop down with prefilled dog breeds from external 
-        <div className = "pure-control-group">
-        <label htmlFor="breed">Puppies Breed</label>
-      <select id="puppiesBreed" name="Breed">
-      {breeds.map((breed) => (
-        // console.log(wombat)
-          <option key={breed}>
-            {breed} 
-          </option>
-        ))}
-      </select>
-      <input id='breedName' type='text' name='breed' value={newBreed} onChange={e => setNewWombat(e.target.value)} />
-    <input type="submit" value="Edit"/>
-    </div> */}
-
-{/* <label htmlFor="cat">Cat Breed: </label>
-          
-<input
-  id="cat"
-  type="text"
-  onChange={handleChange}
-  name="catbreed"
-/>
-<label htmlFor="dog">Dog Breed: </label>
-<input
-id='dog'
-  className="primary-button"
-  type="text"
-  name="dogbreed"
-  onChange={handleChange}
-
-/> */}
+  
