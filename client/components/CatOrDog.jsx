@@ -47,10 +47,11 @@ useEffect(() => {
             id='dogBreed'
             name="breed"
             onChange={props.handleChange}> 
-            {/* set default value on select */}
+            {/* todo: set default value on select */}
             <option value="" disabled selected hidden>Choose {props.name}`s breed...</option>
             {dogBreedNames.map((breed, i) => 
           <option value = {breed} key= {i}>{breed}</option>)}
+          <option value = "other" key= "other">Other</option>
       </select>
             </div> ): (<div>
 <label htmlFor="catBreed">Cat Breed: </label>
@@ -63,7 +64,7 @@ useEffect(() => {
             <option value="" disabled selected hidden>Choose {props.name}`s breed...</option>
              {catBreedNames.map((breed, i) => 
           <option value = {breed} key= {i}>{breed}</option>)}
-            
+            <option value = "other" key= "other">Other</option>
             </select>
             </div> )}
 

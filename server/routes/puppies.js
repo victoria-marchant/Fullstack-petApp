@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { multerUpload } = require('../middleware/multer')
 
 const db = require('../db/db')
 
@@ -30,14 +31,27 @@ router.get('/:id', (req, res) => {
 
 // POST /api/v1/puppies/
 router.post('/', (req, res) => {
-  const { name, owner, breed, imagePath } = req.body
-  db.addPuppy({ name, owner, breed, imagePath })
+  const { name, owner, breed, animalType, imagePath } = req.body
+  db.addPuppy({ name, owner, breed, animalType, imagePath })
     .then((data) => {
       res.json(data)
     })
     .catch((err) => {
       console.error(err)
       res.status(500).send('Server error')
+    })
+})
+
+router.post('/add-upload', multerUpload.single('image'), (req, res) => {
+  const animal = req.body
+  const thisanimal = { ...animal, image: req.file.path.substring(13) }
+  db.addPuppy(thisanimal)
+    .then((newAnimal) => {
+      res.json(newAnimal)
+      return null
+    })
+    .catch((err) => {
+      res.status(500).send(err.message)
     })
 })
 

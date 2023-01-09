@@ -21,7 +21,6 @@ export default function Newpuppy() {
   const [isOtherType, setOtherType] = useState('other')
   const [isImageType, setImageType] = useState('URL')
 
-// console.log(isOtherType)
 console.log(newEntry)
 
   function onSubmit(evt) {
@@ -29,6 +28,16 @@ evt.preventDefault()
 dispatch(addNewPuppy(newEntry))
 setNewEntry(newEntry)
 navigate(`/`)
+  }
+
+  function handleiChange(e) {
+    console.log(e.target.files[0])
+    const newForm = {
+      ...newEntry,
+      imagePath: e.target.files[0],
+    }
+    setNewEntry(newForm)
+   
   }
 
 // function handleChange(evt){
@@ -131,7 +140,8 @@ return(
             id='other'
               className="primary-button"
               type="text"
-              name="animalbreed"
+              name="breed"
+              value = {newEntry.breed}
               onChange={handleChange}
             /> </div> ) : (<CatorDog animalType = {isOtherType} breed = {newEntry.breed} name ={newEntry.name}  handleChange = {handleChange}/>)}
            </div>
@@ -156,7 +166,7 @@ return(
             onChange={handleiTypeChange}
           /> 
           <label htmlFor="uploadSelect">Upload</label>
-         <AddImage imageType = {isImageType}/>
+         <AddImage imageType = {isImageType} imagePath = {newEntry.imagePath} handleChange = {handleChange} handleiChange ={handleiChange}/>
           {/* <AddImage/> */}
           {/* <label htmlFor="imagePath">Image URL </label>
           <input
