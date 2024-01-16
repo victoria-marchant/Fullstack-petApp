@@ -1,4 +1,10 @@
-import { getPuppies, addPuppy, patchPuppy, removePuppy } from '../apis/puppy'
+import {
+  getPuppies,
+  addPuppy,
+  addPuppyI,
+  patchPuppy,
+  removePuppy,
+} from '../apis/puppy'
 
 export const SET_PUPPIES = 'SET_PUPPIES'
 export const POST_PUPPY = 'POST_PUPPY'
@@ -15,8 +21,8 @@ export function setPuppies(puppies) {
 export function fetchPuppies() {
   return (dispatch) => {
     return getPuppies()
-      .then((puppies) => {
-        dispatch(setPuppies(puppies))
+      .then((Puppies) => {
+        dispatch(setPuppies(Puppies))
         return null
       })
       .catch((err) => {
@@ -29,7 +35,7 @@ export function postPuppy(puppy) {
   return {
     type: POST_PUPPY,
     payload: {
-      id: puppy.id,
+      // id: puppy.id,
       name: puppy.name,
       owner: puppy.owner,
       breed: puppy.breed,
@@ -41,8 +47,22 @@ export function postPuppy(puppy) {
 export function addNewPuppy(newPuppy) {
   return (dispatch) => {
     return addPuppy(newPuppy)
-      .then((puppies) => {
-        dispatch(postPuppy(puppies))
+      .then((puppy) => {
+        dispatch(postPuppy(puppy))
+        return null
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
+  }
+}
+
+export function addNewPuppyI(newPuppy) {
+  // console.log(newPuppy)
+  return (dispatch) => {
+    return addPuppyI(newPuppy)
+      .then((puppy) => {
+        dispatch(postPuppy(puppy))
         return null
       })
       .catch((err) => {

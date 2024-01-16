@@ -5,16 +5,27 @@ const baseUrl = '/api/v1/puppies'
 export function getPuppies() {
   return request
     .get(`${baseUrl}`)
-    .then((res) => {
-      return res.body
+    .then((response) => {
+      const allPuppies = response.body
+      return allPuppies
     })
     .catch(errorHandler('GET', '/'))
 }
 
 export function addPuppy(newPuppy) {
   return request
-    .post(`${baseUrl}`) //do I need a diff path
+    .post(`${baseUrl}/add`) //do I need a diff path
     .send(newPuppy) //why no {} to get into db?
+    .then((res) => {
+      return res.body
+    })
+    .catch(errorHandler('POST', '/'))
+}
+
+export function addPuppyI(newPuppy) {
+  return request
+    .post(`${baseUrl}/add-upload`)
+    .send(newPuppy)
     .then((res) => {
       return res.body
     })
