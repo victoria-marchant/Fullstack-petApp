@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {useNavigate} from "react-router-dom"
-import { addNewPuppy } from '../actions/PuppyActions'
+import { addNewPuppy, addNewPuppyI } from '../actions/PuppyActions'
 import AddImage from './AddImage'
 import CatorDog from './CatOrDog'
 
@@ -11,7 +11,7 @@ export default function Newpuppy() {
   const dispatch = useDispatch()
   
   const [newEntry, setNewEntry] = useState({
-    id: '',
+    // id: '',
     name: '',
     owner: '',
     animalType: '',
@@ -21,32 +21,41 @@ export default function Newpuppy() {
   const [isOtherType, setOtherType] = useState('other')
   const [isImageType, setImageType] = useState('URL')
 
-console.log(newEntry)
+
+
 
   function onSubmit(evt) {
+    
 evt.preventDefault()
-dispatch(addNewPuppy(newEntry))
-setNewEntry(newEntry)
-navigate(`/`)
-  }
+const formData = new FormData()
+if (isImageType === 'URL') {
+  dispatch(addNewPuppy(newEntry))
+} else {
+  Object.entries(newEntry).forEach(([key, value]) =>
+    formData.append(key, value)
+    
+  
+  )
+  for(let entry of formData){console.log(entry)}
+  
+  dispatch(addNewPuppyI(formData))
+}
+navigate('/')  
+}
 
   function handleiChange(e) {
-    console.log(e.target.files[0])
+   
+  
     const newForm = {
       ...newEntry,
-      imagePath: e.target.files[0],
+      imagePath: e.target.files[0], 
     }
+  
+    
     setNewEntry(newForm)
-   
   }
 
-// function handleChange(evt){
-//   // console.log(evt.target.name)
-// setNewEntry({
-//   ...newEntry,
-//   [evt.target.name]: evt.target.value,
-// })
-// }
+
 const handleChange=(evnt)=>{
         
   const inputFieldValue = evnt.target.value;
@@ -56,12 +65,9 @@ const handleChange=(evnt)=>{
   }
 
 function handleTypeChange(e) {
-  console.log(e.target.value)
+  
   setOtherType(e.target.value)
-  // let animalType = e
-  // console.log(animalType)
-  // animalType = newEntry.animalType
-  // handleChange(animalType)
+  
 
 }
 
@@ -77,7 +83,7 @@ return(
 <div className='puppycontainer'>
   <a href="/">Home</a>
 
-<form  onSubmit={onSubmit}>
+<form  onSubmit={onSubmit} encType="multipart/form-data" method="post">
         <h2 className="post-title">Add Your New Pet</h2>
         <img src="/images/dogpaw.png" alt="paw print"/>
 

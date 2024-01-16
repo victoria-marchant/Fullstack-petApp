@@ -16,18 +16,7 @@ let catBreeds = useSelector(state => state.catBreeds)
 const catBreedNames = catBreeds && catBreeds.map((breed) => breed.name)
 
 
-// const [dogBreed, setdogBreed] = useState('Dog Breed')
-// const [catBreed, setCatBreed] = useState('Cat Breed')
 
-// function handleDogChange(evt){
-//   // console.log(evt.target.value)
-//   setdogBreed(evt.target.value)
-// }
-
-// function handleCatChange(evt){
-//   console.log(evt.target.value)
-//   setCatBreed(evt.target.value)
-// }
 
 
 useEffect(() => {

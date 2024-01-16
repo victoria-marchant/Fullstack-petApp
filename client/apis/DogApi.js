@@ -5,7 +5,7 @@ export function getDogBreeds() {
     .get(`http://localhost:3000/api/v1/dogapi/breeds`)
     .then((response) => {
       const dogBreedInfo = response.body
-      // console.log(dogBreedInfo)
+
       return dogBreedInfo
     })
     .catch(errorHandler('GET', '/'))

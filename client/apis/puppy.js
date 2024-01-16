@@ -14,8 +14,18 @@ export function getPuppies() {
 
 export function addPuppy(newPuppy) {
   return request
-    .post(`${baseUrl}`) //do I need a diff path
+    .post(`${baseUrl}/add`) //do I need a diff path
     .send(newPuppy) //why no {} to get into db?
+    .then((res) => {
+      return res.body
+    })
+    .catch(errorHandler('POST', '/'))
+}
+
+export function addPuppyI(newPuppy) {
+  return request
+    .post(`${baseUrl}/add-upload`)
+    .send(newPuppy)
     .then((res) => {
       return res.body
     })

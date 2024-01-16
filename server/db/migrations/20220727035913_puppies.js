@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.string('owner')
     table.string('animalType')
     table.string('breed')
-    table.string('imagePath')
+    table.text('imagePath')
   })
 }
 

@@ -5,7 +5,9 @@ import React from "react"
 export default function AddImage(props) {
 
   const imageType = props.imageType
-  // console.log(imageType)
+  
+
+  
   return(
 
 <div>
@@ -18,10 +20,10 @@ export default function AddImage(props) {
              />
      ):(  <input
       id='imageupload'
+      attribute
          className="primary-button"
         type="file"
         name="imagePath"
-        value = {props.imagePath}
        onChange={props.handleiChange}
         /> )}
   </div>

@@ -10,7 +10,7 @@ export default function Puppies() {
 const dispatch = useDispatch()
 
 const puppies = useSelector(state => state.puppies)
-console.log(puppies)
+
 
 // const breedData = useSelector(state => state.dogBreeds)
 // console.log(breedData)

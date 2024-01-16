@@ -29,12 +29,13 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// POST /api/v1/puppies/
-router.post('/', (req, res) => {
+// POST /api/v1/puppies/add
+router.post('/add', (req, res) => {
   const { name, owner, breed, animalType, imagePath } = req.body
   db.addPuppy({ name, owner, breed, animalType, imagePath })
     .then((data) => {
       res.json(data)
+      return null
     })
     .catch((err) => {
       console.error(err)
@@ -42,10 +43,10 @@ router.post('/', (req, res) => {
     })
 })
 
-router.post('/add-upload', multerUpload.single('image'), (req, res) => {
+router.post(`/add-upload`, multerUpload.single('imagePath'), (req, res) => {
   const animal = req.body
-  const thisanimal = { ...animal, image: req.file.path.substring(13) }
-  db.addPuppy(thisanimal)
+  const thisAnimal = { ...animal, imagePath: req.file.path.substring(13) }
+  db.addPuppy(thisAnimal)
     .then((newAnimal) => {
       res.json(newAnimal)
       return null
