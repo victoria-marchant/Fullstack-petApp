@@ -12,20 +12,11 @@ const dispatch = useDispatch()
 const puppies = useSelector(state => state.puppies)
 
 
-// const breedData = useSelector(state => state.dogBreeds)
-// console.log(breedData)
-
-// const names = breedData && breedData.map((data) => data.name)
-// console.log(names)
-
 
 useEffect(() => {
   dispatch(fetchPuppies())
-  // dispatch(fetchDogBreeds())
 }, [])
-// useEffect(() => {
-//   dispatch(fetchDogBreeds())
-// }, [])
+
 
 getDogBreeds() 
 
@@ -47,7 +38,7 @@ getDogBreeds()
     <h3 className="card-title">{puppies.name}</h3>
     <p className="card-text">{puppies.name}'s breed is: {puppies.breed}</p>
     <p className="card-text">{puppies.name}'s family is: {puppies.owner}</p>
-    {/* <div className="card-footer text-muted mx-auto"> */}
+   
     
     <Link to= {`/${puppies.id}/edit`}>
           <button>Edit Puppy</button>

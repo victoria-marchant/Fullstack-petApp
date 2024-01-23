@@ -27,6 +27,7 @@ export default function Newpuppy() {
   function onSubmit(evt) {
     
 evt.preventDefault()
+console.log(newEntry)
 const formData = new FormData()
 if (isImageType === 'URL') {
   dispatch(addNewPuppy(newEntry))
@@ -108,7 +109,7 @@ return(
           ></input>
         </div>
 
-           {/* cat or dog encorp futher external api for cat switch with radio button */}
+          
            <div className="pure-control-group">
             <label htmlFor='animalType'>Pet Type: </label>
           <input

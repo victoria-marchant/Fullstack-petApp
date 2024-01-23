@@ -14,6 +14,7 @@ const puppiesReducer = (state = initialState, action) => {
     case SET_PUPPIES:
       return payload
     case POST_PUPPY:
+      console.log(state)
       return [...state, payload]
     case UPDATE_PUPPY:
       return state.map((puppy) => {

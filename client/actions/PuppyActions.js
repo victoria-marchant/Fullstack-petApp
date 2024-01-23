@@ -58,7 +58,6 @@ export function addNewPuppy(newPuppy) {
 }
 
 export function addNewPuppyI(newPuppy) {
-  // console.log(newPuppy)
   return (dispatch) => {
     return addPuppyI(newPuppy)
       .then((puppy) => {

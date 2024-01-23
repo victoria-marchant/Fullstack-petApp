@@ -14,8 +14,8 @@ export function getPuppies() {
 
 export function addPuppy(newPuppy) {
   return request
-    .post(`${baseUrl}/add`) //do I need a diff path
-    .send(newPuppy) //why no {} to get into db?
+    .post(`${baseUrl}/add`)
+    .send(newPuppy)
     .then((res) => {
       return res.body
     })
@@ -23,6 +23,8 @@ export function addPuppy(newPuppy) {
 }
 
 export function addPuppyI(newPuppy) {
+  console.log(`hit the api`)
+  console.log(newPuppy)
   return request
     .post(`${baseUrl}/add-upload`)
     .send(newPuppy)

@@ -13,7 +13,6 @@ router.get('/breeds', (req, res) => {
     .get('https://api.thecatapi.com/v1/breeds')
     .set('Authorization', 'x-api-key' + catApiKey)
     .then((cat) => {
-      // console.log(breed)
       res.json(JSON.parse(cat.text))
     })
     .catch((err) => {
