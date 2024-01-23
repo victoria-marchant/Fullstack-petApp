@@ -13,7 +13,6 @@ router.get('/breeds', (req, res) => {
     .get('https://api.thedogapi.com/v1/breeds')
     .set('Authorization', 'x-api-key' + dogApiKey)
     .then((dog) => {
-      // console.log(breed)
       res.json(JSON.parse(dog.text))
     })
     .catch((err) => {
